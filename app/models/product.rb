@@ -6,8 +6,8 @@ class Product < ActiveRecord::Base
 
 
 
-  scope :search_by_brand_id, ->(value){ where(brand_id: value)}
-  scope :search_by_brand_name, ->(value){ includes(:brand).where("brands.name" =>  value )}
+  scope :search_by_brand_id, ->(value){ where("brand_id LIKE ? " =>  "%#{value}%")}
+  scope :search_by_brand_name, ->(value){ includes(:brand).where("brands.name LIKE ?" =>  "%#{value}%" )}
 
 
   delegate :name, to: :brand, prefix: true, allow_nil: true
