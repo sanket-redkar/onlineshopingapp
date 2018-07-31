@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Serial number:
+  = @product.serial_number
+%p
+  %b Image:
+  = @product.image
+%p
+  %b Modal:
+  = @product.modal_id
+%p
+  %b Strings:
+  = @product.strings
+%p
+  %b Price:
+  = @product.price
+%p
+  %b Description:
+  = @product.description
+%p
+  %b Type:
+  = @product.type
+%p
+  %b Bought date:
+  = @product.bought_date
+%p
+  %b Sold date:
+  = @product.sold_date
+
+= link_to 'Edit', edit_product_path(@product)
+\|
+= link_to 'Back', products_path

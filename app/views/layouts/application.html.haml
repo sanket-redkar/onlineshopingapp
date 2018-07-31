@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title OnlineShop
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body{'data-gr-c-s-loaded' =>"true"}
+    = render 'layouts/header'
+    .container-fluid#content-container
+      = yield
+:javascript
+  fetchShopingCard(#{session[:shoping_card_id]})
+

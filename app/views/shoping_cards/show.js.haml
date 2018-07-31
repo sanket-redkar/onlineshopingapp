@@ -1,0 +1,13 @@
+- if @shoping_card.valid?
+  $('.shoping-card-details').html("#{escape_javascript(render 'shoping_cards/show')}");
+- else
+  showAlerts('danger', "#{escape_javascript( flash[:error] )}")
+
+- if flash[:error]
+  showAlerts('danger', "#{escape_javascript( flash[:error] )}")
+- if flash[:alert]
+  showAlerts('success', "#{escape_javascript( flash[:alert] )}" )
+
+
+- @shoping_card.product_details.each do |pd|
+  $("a##{pd.source_type}-#{pd.source_id}").addClass('disabled')

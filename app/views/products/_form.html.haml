@@ -1,0 +1,10 @@
+= simple_form_for @product do |f|
+  = f.input :brand_id, as: :select, collection: Brand.all.collect{|b| [b.name, b.id]}
+  = f.input :serial_number, hind: 'Uniq indentity'
+  = f.input :image, as: :file
+  = f.input :price, hint: "prices should be in INR"
+  = f.input :bought_date
+  = f.input :modal_id, hint: 'similar category number'
+  = f.input :strings, as: :integer
+  = f.input :description, as: :text
+  = f.button :submit

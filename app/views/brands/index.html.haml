@@ -1,0 +1,17 @@
+%br
+- if current_user && current_user.admin?
+  = link_to 'New Brand', new_brand_path
+
+.row
+  - @brands.each do |brand|
+    .col-sm-2{style: 'min-height: 200px;'}
+      = image_tag '/sample.jpg', class: 'img-circle', width: 100, height: 100
+      %br
+      %span
+        %b= link_to brand.name, products_path(search: { brand_name: brand.name })
+      %p= brand.description
+      = "#{brand.available_products.count} - available"
+      - if current_user && current_user.admin?
+        %br
+          = link_to 'Destroy', brand_path(brand), method: :delete, data: { confirm: 'Are you sure?' }
+

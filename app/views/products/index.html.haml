@@ -1,0 +1,26 @@
+%br
+.row
+  .col-12
+    = simple_form_for(:search, url: products_path, method: :get, html: { class: 'navbar-form navbar-right' } )do |f|
+      = f.input :brand_name, input_html: { value: params[:search].try(:[], :brand_name) }
+      = f.input :modal_id, input_html: { value: params[:search].try(:[], :modal_id) }
+      = f.submit 'Search', class: 'btn btn-sm'
+
+  - if current_user && current_user.admin?
+    = link_to 'New Product', new_product_path
+  .col-12
+    .row
+    - @products.each do |product|
+      .col-sm-2{style: 'height: 250px; overflow:hidden;'}
+        = image_tag product.image.url, class: 'img-circle', width: 100, height: 100
+        %ul.nav
+          %li
+            %b= product.serial_number
+          %li= "Brand : #{product.brand_name }"
+          %li= "Model : #{product.modal_id}"
+          %li= product.description
+          %li= "INR- #{product.price}"
+          %li= link_to 'Add To Card', shoping_cards_path(shoping_card: { product_details_attributes: { '0' => { source_id: product.id, source_type: 'Product' } } } ), method: :post, class: 'btn btn-sm btn-info', remote: true, id: "Product-#{product.id}"
+        - if current_user && current_user.admin?
+          %br
+            = link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }

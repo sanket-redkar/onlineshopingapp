@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Serial number:
+  = @accessory.serial_number
+%p
+  %b Name:
+  = @accessory.name
+%p
+  %b Image:
+  = @accessory.image
+%p
+  %b Modal:
+  = @accessory.modal_id
+%p
+  %b Data:
+  = @accessory.data
+%p
+  %b Price:
+  = @accessory.price
+%p
+  %b Description:
+  = @accessory.description
+%p
+  %b Bought date:
+  = @accessory.bought_date
+%p
+  %b Sold date:
+  = @accessory.sold_date
+
+= link_to 'Edit', edit_accessory_path(@accessory)
+\|
+= link_to 'Back', accessories_path

@@ -1,0 +1,10 @@
+= simple_form_for @accessory do |f|
+  = f.input :serial_number
+  = f.input :name
+  = f.input :image, as: :file
+  = f.input :modal_id
+  = f.input :data
+  = f.input :price
+  = f.input :description
+  = f.input :bought_date, as: :date
+  = f.submit

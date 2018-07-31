@@ -1,0 +1,71 @@
+.raw.shoping-card-details
+  .col-sm-12
+    %h3.page_header Gitars
+    %table.table.table-responsive.hover
+
+      %thead
+        %tr
+          %th
+          %th Modal Id
+          %th Unit
+          %th Price
+          %th
+
+      %tbody
+        - gitars_cost = 0
+        - @shoping_card.gitars.includes(:brand).group_by{|g| [g.modal_id, g.brand] }.each do |data, gitars|
+          %tr
+            %td= image_tag gitars.sample.image.url, class: 'img-circle', width: 20, height: 20
+            %td= "#{data[1].try(:name)}--#{data[0]}"
+            %td
+              = link_to '', minus_product_details_path(source_id: gitars.sample.id, source_type: 'Product'), remote: true, method: :delete, class: 'btn btn-default btn-sm fa fa-minus'
+              %a.btn.btn-default.btn-sm= gitars.count
+              = link_to '', add_product_details_path(source_id: gitars.sample.id, source_type: 'Product'), remote: true, method: :post, class: 'btn btn-default btn-sm fa fa-plus'
+
+            - gitars_cost += gitars.sum(&:price)
+            %td= gitars.sum(&:price)
+            %td
+        %tr
+          %td Total
+          %td
+          %td
+          %td= "A = #{gitars_cost}"
+          %td
+  .col-sm-12
+    %h3.page_header Accessories
+    %table.table.table-responsive.hover
+      %thead
+        %tr
+          %th
+          %th Modal Id
+          %th Unit
+          %th Price
+          %th
+      %tbody
+        - accessories_cost = 0
+        - @shoping_card.accessories.group_by(&:modal_id).each do |modal_id, accessories|
+          %tr
+            %td= image_tag accessories.sample.image.url, class: 'img-circle', width: 20, height: 20
+            %td= modal_id
+            %td
+              = link_to '', minus_product_details_path(source_id: accessories.sample.id, source_type: 'Accessory'), remote: true, method: :delete, class: 'btn btn-default btn-sm fa fa-minus'
+              %a.btn.btn-default.btn-sm= accessories.count
+              = link_to '', add_product_details_path(source_id: accessories.sample.id, source_type: 'Accessory'), remote: true, method: :post, class: 'btn btn-default btn-sm fa fa-plus'
+            - accessories_cost += accessories.sum(&:price)
+            %td= accessories.sum(&:price)
+            %td
+        %tr
+          %td Total
+          %td
+          %td
+          %td= "B = #{accessories_cost}"
+          %td
+  .col-sm-12.col-md-12.col-lg-12
+    %table.table
+      %tbody
+        %tr
+          %th Total Payable Amount
+          %th= "A + B =  #{gitars_cost + accessories_cost}"
+
+- if current_user
+  = link_to 'Buy', purchase_shoping_card_path(@shoping_card), method: :put, class: 'btn btn-default btn-sm'

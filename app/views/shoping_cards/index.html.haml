@@ -1,0 +1,20 @@
+%h1 Listing Shoping Sards
+
+%table.table.table-responsive
+  %thead
+    %tr
+      %th Sr. No
+      %th Status
+      %th
+
+  %tbody
+    - @shoping_cards.each do |shoping_card|
+      %tr
+        %td= link_to shoping_card.id, shoping_card
+        %td= shoping_card.status || 'generated'
+
+        %td
+          - if shoping_card.status == 'cooking'
+            = link_to 'Destroy', shoping_card, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br

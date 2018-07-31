@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serial_number: MyString
+  image: 
+  modal_id: MyString
+  strings: 1
+  price: 1.5
+  description: MyText
+  type: 
+  bought_date: 2018-07-26
+  sold_date: 2018-07-26
+
+two:
+  serial_number: MyString
+  image: 
+  modal_id: MyString
+  strings: 1
+  price: 1.5
+  description: MyText
+  type: 
+  bought_date: 2018-07-26
+  sold_date: 2018-07-26
